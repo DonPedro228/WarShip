@@ -33,22 +33,35 @@ Ships sink, fields explode, and only one admiral will prevail. Will it be you?
 ## 🎯 Gameplay Preview
 
 =========== SEA BATTLE ===========
+
 Your Field:
+
 0 1 2 3 4 5 6 7 8 9
+
 0 |~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
 1 |~ ■ ■ ■ ~ ~ ~ ~ ~ ~
+
 2 |~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
 ...
+
 Enemy Field:
+
 0 1 2 3 4 5 6 7 8 9
+
 0 |~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
 1 |~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
 ...
+
 
         Your turn:
         Enter target X (0-9): 2
         Enter target Y (0-9): 1
         🎯 Hit!
+
 
 
 ---
