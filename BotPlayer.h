@@ -25,7 +25,7 @@ public:
 
 	//Main methods
 	void place_ships() override;
-	void make_turn(Board& opponent_board) override;
+	bool make_turn(Board& opponent_board) override;
 
 private:
 	void queue_adjacent(int x, int y);

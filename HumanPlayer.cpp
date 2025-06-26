@@ -85,8 +85,7 @@ bool HumanPlayer::get_direction() {
 	}
 }
 
-void HumanPlayer::make_turn(Board& opponent_board) {
-	while (true) {
+bool HumanPlayer::make_turn(Board& opponent_board) {
 		int x, y;
 		cout << ">> Enter target X (0-9): ";
 		cin >> x;
@@ -95,21 +94,22 @@ void HumanPlayer::make_turn(Board& opponent_board) {
 
 		try {
 			CellState result = opponent_board.shoot(x, y);
-			switch (result) {
-			case CellState::Hit:
-				cout << "🎯 Hit!" << endl;
-				break;
-			case CellState::Killed:
-				cout << "💥 Killed!" << endl;
-				break;
-			case CellState::Miss:
-				cout << "💦 Miss." << endl;
-				break;
+			if (result == CellState::Miss) {
+				cout << "Miss.\n";
+				return false;
 			}
-			break; \
+			if (result == CellState::Hit) {
+				cout << "Hit!\n";
+				return true;
+			}
+			if (result == CellState::Killed) {
+				cout << "Killed!\n";
+				return true;
+			}
 		}
-		catch (const std::exception& e) {
-			cout << "⚠️  Error: " << e.what() << " Try again." << endl;
+		catch (...) {
+			cout << "Invalid input. Try again.\n";
+			return make_turn(opponent_board);  
 		}
-	}
+	return false;
 }

@@ -10,7 +10,7 @@ public:
 	virtual ~Player() {}
 
 	virtual void place_ships() = 0;
-	virtual void make_turn(Board& opponent_board) = 0;
+	virtual bool make_turn(Board& opponent_board) = 0;
 
 
 	//Getters

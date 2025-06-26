@@ -30,14 +30,20 @@ void Game::loop() {
 	while (true) {
 		draw_fields();
 
+		bool hit;
+
 		if (human_turn) {
-			cout << ">> Your turn: " << endl;
-			human.make_turn(bot.get_board());
+			do {
+				cout << ">> Your turn: " << endl;
+				hit = human.make_turn(bot.get_board());
+			} while (hit && !bot.get_board().all_ships_killed());
 		}
 		else {
-			cout << ">> Bot`s turn: " << endl;
-			this_thread::sleep_for(chrono::milliseconds(800));
-			bot.make_turn(human.get_board());
+			do {
+				cout << ">> Bot's turn: " << endl;
+				this_thread::sleep_for(chrono::milliseconds(800));
+				hit = bot.make_turn(human.get_board());
+			} while (hit && !human.get_board().all_ships_killed());
 		}
 
 		if (bot.get_board().all_ships_killed()) {

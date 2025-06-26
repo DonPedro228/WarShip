@@ -32,7 +32,7 @@ void BotPlayer::place_ships() {
 	cout << "🤖 Bot has placed its ships." << endl;
 }
 
-void BotPlayer::make_turn(Board& opponent_board) {
+bool BotPlayer::make_turn(Board& opponent_board) {
 	while (true) {
 		int x = -1, y = -1;
 
@@ -49,7 +49,7 @@ void BotPlayer::make_turn(Board& opponent_board) {
 			} while (!is_valid_target(x, y));
 		}
 
-		if (!is_valid_target(x, y)) continue;  
+		if (!is_valid_target(x, y)) continue;
 		shots_made.push_back({ x, y });
 
 		try {
@@ -60,7 +60,7 @@ void BotPlayer::make_turn(Board& opponent_board) {
 				cout << "Killed!" << endl;
 				hunt_state = HuntState::Searching;
 				targeting_queue.clear();
-				break;
+				return true;
 			}
 			else if (result == CellState::Hit) {
 				cout << "Hit!" << endl;
@@ -113,6 +113,7 @@ void BotPlayer::make_turn(Board& opponent_board) {
 						}
 					}
 				}
+				return true;
 			}
 			else if (result == CellState::Miss) {
 				cout << "Miss." << endl;
@@ -124,7 +125,10 @@ void BotPlayer::make_turn(Board& opponent_board) {
 			continue;
 		}
 	}
+
+	return false;
 }
+
 
 void BotPlayer::queue_adjacent(int x, int y) {
 	pair<int, int> directions[4] = {
